@@ -5,13 +5,13 @@ Goal of the hackathon (Hack 1, H1) is to lay the foundation of an HTTP API based
 
 ## Glossary
 
-H1 - This hackathon, Hack 1.
+H1 – This hackathon, Hack 1.
 
-Server - The extreme-play server that runs the show. 
+Server – The extreme-play server that runs the show. 
 
-Player - Stands for a team or their server that participates in the game.
+Player – Stands for a team or their server that participates in the game.
 
-HTTP related - ``http://tools.ietf.org/id/draft-ietf-httpbis`` (payload etc, ``http://tools.ietf.org/id/draft-ietf-httpbis-p2-semantics-23.html``). 
+HTTP related – ``http://tools.ietf.org/id/draft-ietf-httpbis`` (payload etc, ``http://tools.ietf.org/id/draft-ietf-httpbis-p2-semantics-23.html``). 
 
 Feature Flag – A configurable property that enables or disables a feature.
 
@@ -37,19 +37,19 @@ Each requirement starts with such a priority index. Requirements also leak some 
 
 ### Testing 
 
-``0`` - Visibility of a player to the server, before or after registration, can be tested by invoking ``GET http://{host}:{port}/test?url=http://{another-host}:{another-port}/{path/to/the/resource}``. The server should respond within a configurable time limit (default ``2 seconds``) the results of its attempt to connect and read the resource provided as the query parameter. 
+``0`` – Visibility of a player to the server, before or after registration, can be tested by invoking ``GET http://{host}:{port}/test?url=http://{another-host}:{another-port}/{path/to/the/resource}``. The server should respond within a configurable time limit (default ``2 seconds``) the results of its attempt to connect and read the resource provided as the query parameter. 
 
 	status: 200 OK
 	response content type : plain/text
 	http payload: Tested: http://{another-host}:{another-port}/{path/to/the/resource} connected
 
 
-``2`` - Metrics for time to connect and latency. 
+``2`` – Metrics for time to connect and latency. 
 
 
 ### Registration
 
-``0`` - As a player I should be able to POST the team's name and the URL (as used in the test above) of my server to register as a player. The server should respond with ``400`` if I post in the wrong format or, drop name or the URL or both. ``409`` is used to indicate that either the name or the URL is already taken. A successful request should elicit ``201`` and a ``location header`` with the URL in the format ``http://{host}:{port}/player/{uuid}`` where ``uuid`` is how a player is identified.
+``0`` – As a player I should be able to POST the team's name and the URL (as used in the test above) of my server to register as a player. The server should respond with ``400`` if I post in the wrong format or, drop name or the URL or both. ``409`` is used to indicate that either the name or the URL is already taken. A successful request should elicit ``201`` and a ``location header`` with the URL in the format ``http://{host}:{port}/player/{uuid}`` where ``uuid`` is how a player is identified.
 ```json
 {
 	"name": "SCULK",
@@ -57,21 +57,53 @@ Each requirement starts with such a priority index. Requirements also leak some 
 }
 ```
 
-``1`` - For successful requests the server should also generate two ``uuid`` keys. The keys are named ``player-auth-key`` and ``server-id-key``. Both keys should be unique. The first key is used by the player to authenticate itself and the second is used by the server to identify itself. These keys should be kept secure. 
+``1`` – For successful requests the server should also generate two ``uuid`` keys. The keys are named ``player-auth-key`` and ``server-id-key``. Both keys should be unique. The first key is used by the player to authenticate itself and the second is used by the server to identify itself. These keys should be kept a secret. 
 
-``2`` - As a player I should be able to ``DELETE`` my account by providing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.unregister-able: true``, that enables or disables it.
+``2`` – As a player I should be able to ``DELETE`` my account by providing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.unregister-able: true``, that enables or disables it.
 
-``2`` - As a player I should be able to ``pause`` or ``play`` my account by POSTing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.pause-able: true``, that enables or disables it.
+``2`` – As a player I should be able to ``pause`` or ``play`` my account by POSTing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.pause-able: true``, that enables or disables it.
 
-``2`` - For every paused minute deduct 100 pts. 
+``2`` – For every paused minute deduct 100 pts. 
 
 ### Playing 
 
 ### History 
 
+``0`` – ``GET http://{host}:{port}/player/{uuid}`` should return the history of a player. Example: 
+
+```json
+[
+ {
+  token: "12322e232323",
+  "task" : "what is 50 x 1000",
+  "response": {
+   "status": 200,
+   "payload": "5000"
+  },
+  "score": "-100"
+ },
+ {
+  token: "12322e232323",
+  "task" : "what is 10 x 1000",
+  "response": {
+   "status": 200,
+   "payload": "10000"
+  },
+  "score": "100"
+ },
+ ...
+]
+```
+
+
+
+``2`` – ``GET http://{host}:{port}/player/{uuid}/events`` should push history of a players interactions as HTML5 server side events from the server.
+
+
+
 ### Leader-board
 
-``0`` - ``GET http://{host}:{port}/leader`` should return the latest status of the leader-board as JSON. Example: 
+``0`` – ``GET http://{host}:{port}/leader`` should return the latest status of the leader-board as JSON. Example: 
 
 ```json
 {
@@ -81,7 +113,7 @@ Each requirement starts with such a priority index. Requirements also leak some 
 }
 ```
 
-``2`` - ``GET http://{host}:{port}/leader/events`` should return an endpoint that pushes leader-board changes as HTML5 server side events from the server. 
+``2`` – ``GET http://{host}:{port}/leader/events`` should return an endpoint that pushes leader-board changes as HTML5 server side events from the server. 
 
 
 
