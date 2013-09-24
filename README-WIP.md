@@ -35,7 +35,7 @@ The requirements are divided into bite sized pieces and have priorities
 Each requirement starts with such a priority index. Requirements also leak some of the HTTP details like methods, statuses etc. Prio ``2`` reqs may not be very detailed and if you are planning to do one that isn't then please start a discussion.
 
 
-### Testing 
+### Visibility Testing 
 
 ``0`` – Visibility of a player to the server, before or after registration, can be tested by invoking ``GET http://{host}:{port}/test?url=http://{another-host}:{another-port}/{path/to/the/resource}``. The server should respond within a configurable time limit (default ``2 seconds``) the results of its attempt to connect and read the resource provided as the query parameter. 
 
@@ -63,9 +63,55 @@ Each requirement starts with such a priority index. Requirements also leak some 
 
 ``2`` – As a player I should be able to ``pause`` or ``play`` my account by POSTing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.pause-able: true``, that enables or disables it.
 
-``2`` – For every paused minute deduct 100 pts. 
 
-### Playing 
+### Task Repository
+
+``0`` – Model tasks such that pluggable tasks can be registered for use. Something like below: 
+
+```scala
+// an atomic task to test a player
+trait Task {
+	def query : String
+	def verify : String => String 
+} 
+
+// a generator for a type of Tasks
+trait Tasks[A <: Task] {
+	def next : A 
+}
+
+// repo of such task generators
+// Note:  this can be thought of as a random number generator and we could make it referentially transparent 
+// and same with the Tasks above
+object TasksRepo  {
+	def register : Tasks => Unit = ???
+
+	def select : Tasks = ??? 
+}	
+```
+
+``1`` – create the following tasks type 
+  
+* Addition tasks (add two numbers, add a list of numbers)
+* Multiplication tasks 
+* Max in a list of random numbers of random length 
+* First x numbers in the Fibonacci series
+
+``2`` - Can we generalize mathematical tasks?
+
+``2`` - Can we generalize list tasks?
+
+``2`` – Adjective tasks like - I have a red apple. What color is the apple?
+
+### Playing a Player
+
+
+### Scoring 
+
+``0`` – For each task  
+
+
+``2`` – For every paused minute deduct 100 pts. 
 
 ### History 
 
@@ -83,8 +129,8 @@ Each requirement starts with such a priority index. Requirements also leak some 
   "score": "-100"
  },
  {
-  token: "12322e232323",
-  "task" : "what is 10 x 1000",
+  token: "12322e2324444",
+  "task" : "what is 10 x 1000?",
   "response": {
    "status": 200,
    "payload": "10000"
@@ -95,7 +141,7 @@ Each requirement starts with such a priority index. Requirements also leak some 
 ]
 ```
 
-
+``1`` – Add response times in milliseconds from the player to the history.
 
 ``2`` – ``GET http://{host}:{port}/player/{uuid}/events`` should push history of a players interactions as HTML5 server side events from the server.
 
