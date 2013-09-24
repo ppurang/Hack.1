@@ -1,7 +1,7 @@
 Hack.1
 ======
 
-Goal of the hackathon (Hack 1, H1) is to lay the foundation of an HTTP API based extreme-startup done in Scala. The H1 is only about the HTTP APIs and not about any (G)UI. This document lies down the general direction and the requirements.
+Goal of the hackathon (Hack 1, H1) [http://www.meetup.com/Scala-Berlin-Brandenburg/events/139827592/](http://www.meetup.com/Scala-Berlin-Brandenburg/events/139827592/) is to lay the foundation of an HTTP API based extreme-startup done in Scala. The H1 is only about the HTTP APIs and not about any (G)UI. This document lies down the general direction and the requirements.
 
 ## Glossary
 
@@ -52,8 +52,8 @@ Each requirement starts with such a priority index. Requirements also leak some 
 ``0`` – As a player I should be able to POST the team's name and the URL (as used in the test above) of my server to register as a player. The server should respond with ``400`` if I post in the wrong format or, drop name or the URL or both. ``409`` is used to indicate that either the name or the URL is already taken. A successful request should elicit ``201`` and a ``location header`` with the URL in the format ``http://{host}:{port}/player/{uuid}`` where ``uuid`` is how a player is identified.
 ```json
 {
-	"name": "SCULK",
-	"url" : "http://mystic-wind.heroku.com/play"
+  "name": "SCULK",
+  "url" : "http://mystic-wind.heroku.com/play"
 }
 ```
 
@@ -153,9 +153,9 @@ object TasksRepo  {
 
 ```json
 {
-	"SCULK" : 10000,
-	"NOGO" : -1000,
-	"Hello World": 0 
+  "SCULK" : 10000,
+  "NOGO" : -1000,
+  "Hello World": 0 
 }
 ```
 
