@@ -32,6 +32,8 @@ The requirements are divided into bite sized pieces and have priorities
  - ``1`` should have
  - ``2`` nice to have
 
+ If two features have the same priority then the order of the feature decides the relative priority.
+
 Each requirement starts with such a priority index. Requirements also leak some of the HTTP details like methods, statuses etc. Prio ``2`` reqs may not be very detailed and if you are planning to do one that isn't then please start a discussion.
 
 
@@ -97,6 +99,8 @@ object TasksRepo  {
 * Max in a list of random numbers of random length 
 * First x numbers in the Fibonacci series
 
+
+
 ``2`` - Can we generalize mathematical tasks?
 
 ``2`` - Can we generalize list tasks?
@@ -105,11 +109,25 @@ object TasksRepo  {
 
 ### Playing a Player
 
+``0`` – For each player registered create an actor hierarchy dedicated at playing just that one player.
+
+``0`` – Every ``x`` ms (configurable) select a ``Tasks`` from the ``TaskRepo`` to generate a ``Task`` to invoke on the player. Generate a long ``token`` to capture the sequential generation of (Use a timestamp based ordered key).   
+
+``0`` – Whenever a call to a player 
+* fails to connect emit an event ``PlayerDown``
+* timesout emit an event ``PlayerTimedOut``
+* returns an answer emit an event ``PlayerResponded``
+
 
 ### Scoring 
 
-``0`` – For each task  
+``0`` – It should be possible to play without points. This should be configurable. 
 
+``0`` – For each task set a max timeout till the player can respond for questions that go unanswered or time out deduct 200 pts. 
+
+``0`` – For each task answered correctly award 100 pts and for every wrong answer deduct 100 pts.
+
+``1`` – Extend tasks to provide possible points to win and possible points to loose. 
 
 ``2`` – For every paused minute deduct 100 pts. 
 
