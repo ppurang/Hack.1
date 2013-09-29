@@ -3,6 +3,28 @@ Hack.1
 
 Goal of the hackathon (Hack 1, H1) [http://www.meetup.com/Scala-Berlin-Brandenburg/events/139827592/](http://www.meetup.com/Scala-Berlin-Brandenburg/events/139827592/) is to lay the foundation of an HTTP API based extreme-startup done in Scala. The H1 is only about the HTTP APIs and not about any (G)UI. This document lies down the general direction and the requirements.
 
+## Preparation
+
+On that day make sure that you have a github account (https://github.com/signup/free) and heroku account (https://id.heroku.com/signup).
+
+You should prepare the following on your laptops to make sure that you don't loose anytime on that day
+
+1. Install git-core. For example on ubuntu ``sudo apt-get install git-core``
+
+2. Install heroku toolbelt: https://toolbelt.heroku.com/
+
+3. Install play 2.2 : http://downloads.typesafe.com/play/2.2.0/play-2.2.0.zip
+
+4. Install sbt 13: http://www.scala-sbt.org/0.13.0/docs/Getting-Started/Setup.html
+
+5. Clone: https://github.com/ppurang/extreme-play and execute ``play run`` and access localhost:9000  in your browser or use curl. you should see: ``And we have lift off!``
+
+6. Clone: https://github.com/ppurang/extreme-play-test
+
+7. Prepare your IDE. For example for me it is as easy as executing ``play idea`` for https://github.com/ppurang/extreme-play and then I can open the project in Intellij.
+
+Please keep checking this space for more updates. 
+
 ## Glossary
 
 H1 – This hackathon, Hack 1.
@@ -18,12 +40,11 @@ Feature Flag – A configurable property that enables or disables a feature.
 ## General
 
 * Extreme Server – The server will be written in ``Play 2.2``
-
 * Serialization/deserialization format – ``Json``. Play json or Pickling might be used.  
-
 * Storage/Persistence – This layer should be abstracted. First implementation should only depend on in-memory collections like Maps, Lists etc.
-
-
+* Collaboration will center around ``https://github.com/ppurang/extreme-play``. Collaborators/Teams should fork the repo and issue pull requests. 
+* The server is deployed to heroku at ``http://extreme-play.herokuapp.com/`` 
+* Acceptance tests can be found at ``https://github.com/ppurang/extreme-play-test``
 
 ## Requirements
 
@@ -32,7 +53,7 @@ The requirements are divided into bite sized pieces and have priorities
  - ``1`` should have
  - ``2`` nice to have
 
- If two features have the same priority then the order of the feature decides the relative priority.
+If two features have the same priority then the order of the feature decides the relative priority.
 
 Each requirement starts with such a priority index. Requirements also leak some of the HTTP details like methods, statuses etc. Prio ``2`` reqs may not be very detailed and if you are planning to do one that isn't then please start a discussion.
 
