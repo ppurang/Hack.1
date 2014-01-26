@@ -67,7 +67,7 @@ Each requirement starts with such a priority index. Requirements also leak some 
 	http payload: Tested: http://{another-host}:{another-port}/{path/to/the/resource} connected~~
 
 
-``2`` – Metrics for time to connect and latency. 
+``2`` – <del>Metrics for time to connect and latency.</del> 
 
 
 ### Registration
