@@ -60,11 +60,11 @@ Each requirement starts with such a priority index. Requirements also leak some 
 
 ### Visibility Testing 
 
-``0`` – Visibility of a player to the server, before or after registration, can be tested by invoking ``GET http://{host}:{port}/test?url=http://{another-host}:{another-port}/{path/to/the/resource}``. The server should respond within a configurable time limit (default ``2 seconds``) the results of its attempt to connect and read the resource provided as the query parameter. 
+``0`` – <del>Visibility of a player to the server, before or after registration, can be tested by invoking ``GET http://{host}:{port}/test?url=http://{another-host}:{another-port}/{path/to/the/resource}``. The server should respond within a configurable time limit (default ``2 seconds``) the results of its attempt to connect and read the resource provided as the query parameter.</del>
 
 	status: 200 OK
 	response content type : plain/text
-	http payload: Tested: http://{another-host}:{another-port}/{path/to/the/resource} connected
+	http payload: Tested: http://{another-host}:{another-port}/{path/to/the/resource} connected~~
 
 
 ``2`` – Metrics for time to connect and latency. 
@@ -72,7 +72,7 @@ Each requirement starts with such a priority index. Requirements also leak some 
 
 ### Registration
 
-``0`` – As a player I should be able to POST the team's name and the URL (as used in the test above) of my server to register as a player. The server should respond with ``400`` if I post in the wrong format or, drop name or the URL or both. ``409`` is used to indicate that either the name or the URL is already taken. A successful request should elicit ``201`` and a ``location header`` with the URL in the format ``http://{host}:{port}/player/{uuid}`` where ``uuid`` is how a player is identified.
+``0`` – <del>As a player I should be able to POST the team's name and the URL (as used in the test above) of my server to register as a player. The server should respond with ``400`` if I post in the wrong format or, drop name or the URL or both. ``409`` is used to indicate that either the name or the URL is already taken. A successful request should elicit ``201`` and a ``location header`` with the URL in the format ``http://{host}:{port}/player/{uuid}`` where ``uuid`` is how a player is identified. </del>
 ```json
 {
   "name": "SCULK",
@@ -80,16 +80,16 @@ Each requirement starts with such a priority index. Requirements also leak some 
 }
 ```
 
-``1`` – For successful requests the server should also generate two ``uuid`` keys. The keys are named ``player-auth-key`` and ``server-id-key``. Both keys should be unique. The first key is used by the player to authenticate itself and the second is used by the server to identify itself. These keys should be kept a secret. 
+``1`` – <del> For successful requests the server should also generate two ``uuid`` keys. The keys are named ``player-auth-key`` and ``server-id-key``. Both keys should be unique. The first key is used by the player to authenticate itself and the second is used by the server to identify itself. These keys should be kept a secret.</del> 
 
-``2`` – As a player I should be able to ``DELETE`` my account by providing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.unregister-able: true``, that enables or disables it.
+``2`` – <del>As a player I should be able to ``DELETE`` my account by providing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.unregister-able: true``, that enables or disables it. </del>
 
-``2`` – As a player I should be able to ``pause`` or ``play`` my account by POSTing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.pause-able: true``, that enables or disables it.
+``2`` – <del>As a player I should be able to ``pause`` or ``play`` my account by POSTing the team's ``player-auth-key`` (as payload) to the ``http://{host}:{port}/player/{uuid}``. This feature should be controlled by a configurable property, ``feature.player.pause-able: true``, that enables or disables it.</del>
 
 
 ### Task Repository
 
-``0`` – Model tasks such that pluggable tasks can be registered for use. Something like below: 
+``0`` – <del>Model tasks such that pluggable tasks can be registered for use. Something like below:</del> 
 
 ```scala
 // an atomic task to test a player
@@ -113,20 +113,20 @@ object TasksRepo  {
 }	
 ```
 
-``1`` – create the following tasks type 
+``1`` – <del> create the following tasks type</del> 
   
-* Addition tasks (add two numbers, add a list of numbers)
-* Multiplication tasks 
-* Max in a list of random numbers of random length 
-* First x numbers in the Fibonacci series
+* ~~Addition tasks (add two numbers, add a list of numbers)~~
+* ~~Multiplication tasks~~
+* ~~Max in a list of random numbers of random length~~ 
+* ~~First x numbers in the Fibonacci series~~
 
 
 
-``2`` - Can we generalize mathematical tasks?
+``2`` - ~~Can we generalize mathematical tasks?~~
 
-``2`` - Can we generalize list tasks?
+``2`` - ~~Can we generalize list tasks?~~
 
-``2`` – Adjective tasks like - I have a red apple. What color is the apple?
+``2`` – ~~Adjective tasks like - I have a red apple. What color is the apple?~~
 
 ### Playing a Player
 
